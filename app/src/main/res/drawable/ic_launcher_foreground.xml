@@ -1,0 +1,46 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Browser Window Card Base -->
+    <path
+        android:fillColor="#161616"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:pathData="M26,26h56c3.3,0 6,2.7 6,6v44c0,3.3 -2.7,6 -6,6h-56c-3.3,0 -6,-2.7 -6,-6v-44c0,-3.3 2.7,-6 6,-6z"/>
+
+    <!-- Browser Window Header Line -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#333333"
+        android:strokeWidth="1.5"
+        android:pathData="M20,38h68"/>
+
+    <!-- Browser Window Window Control Dots -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M27,32a2,2 0 1,0 4,0a2,2 0 1,0 -4,0 M34,32a2,2 0 1,0 4,0a2,2 0 1,0 -4,0 M41,32a2,2 0 1,0 4,0a2,2 0 1,0 -4,0"/>
+
+    <!-- Bold Stylized F12 Text Emblem -->
+    <!-- Letter 'F' -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M32,46h14v4h-9v6h7v4h-7v12h-5z"/>
+
+    <!-- Number '1' -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M52,49l-4,3v-4l4,-2h4v26h-4z"/>
+
+    <!-- Number '2' -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M64,50c0,-2.5 2,-4 5,-4c3,0 5,1.5 5,4c0,2.5 -2,4.5 -5,7.5l-5,5v3h11v-4h-5.5l3.5,-3.5c3.5,-3.5 5,-6 5,-8c0,-4.5 -3.5,-7.5 -9,-7.5c-5.5,0 -9,3 -9,7.5z"/>
+
+    <!-- Terminal Cursor Blink Bar Underneath -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M48,76h12v2h-12z"/>
+</vector>

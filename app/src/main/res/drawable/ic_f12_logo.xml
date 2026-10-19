@@ -1,0 +1,45 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+
+    <!-- Outer Squircle Outline -->
+    <path
+        android:fillColor="#141414"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2.5"
+        android:pathData="M18,12h60c5.5,0 10,4.5 10,10v52c0,5.5 -4.5,10 -10,10h-60c-5.5,0 -10,-4.5 -10,-10v-52c0,-5.5 4.5,-10 10,-10z"/>
+
+    <!-- Browser Header Divider -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#333333"
+        android:strokeWidth="1.5"
+        android:pathData="M8,26h80"/>
+
+    <!-- Header Terminal Dots -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M16,19a2.5,2.5 0 1,0 5,0a2.5,2.5 0 1,0 -5,0 M25,19a2.5,2.5 0 1,0 5,0a2.5,2.5 0 1,0 -5,0 M34,19a2.5,2.5 0 1,0 5,0a2.5,2.5 0 1,0 -5,0"/>
+
+    <!-- Letter F -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,38h16v5h-10v7h8v5h-8v17h-6z"/>
+
+    <!-- Number 1 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M46,42l-4,3v-5l4,-2h5v36h-5z"/>
+
+    <!-- Number 2 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,45c0,-4 3,-6.5 7.5,-6.5c4.5,0 7.5,2.5 7.5,6.5c0,3.5 -2.5,6.5 -7,10.5l-6,5.5v3.5h15v-5h-7.5l4.5,-4.5c4,-4 6,-7 6,-10c0,-6 -4.5,-10 -12.5,-10c-7.5,0 -12,4 -12,10z"/>
+
+    <!-- Subtle Dev Bracket Accent on bottom right -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M44,78h16v3h-16z"/>
+</vector>

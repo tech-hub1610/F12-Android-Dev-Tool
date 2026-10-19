@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingVertical="4dp"
+    android:paddingEnd="8dp"
+    android:background="?attr/selectableItemBackground">
+
+    <View
+        android:id="@+id/node_indent"
+        android:layout_width="0dp"
+        android:layout_height="1dp" />
+
+    <ImageView
+        android:id="@+id/node_chevron"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/ic_chevron_right"
+        android:contentDescription="Expand" />
+
+    <TextView
+        android:id="@+id/node_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="div"
+        android:textColor="@color/text_primary"
+        android:textSize="12sp"
+        android:fontFamily="monospace"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/node_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#app"
+        android:textColor="@color/text_secondary"
+        android:textSize="11sp"
+        android:fontFamily="monospace" />
+
+    <TextView
+        android:id="@+id/node_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=".container"
+        android:textColor="@color/text_tertiary"
+        android:textSize="11sp"
+        android:fontFamily="monospace"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/node_child_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:background="@drawable/bg_badge"
+        android:text="3"
+        android:textColor="@color/text_tertiary"
+        android:textSize="9sp"
+        android:fontFamily="monospace"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="1dp"
+        android:visibility="gone" />
+</LinearLayout>

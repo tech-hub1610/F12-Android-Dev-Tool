@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Top Browser Toolbar: [ Home ] [ URL Field ] [ F12 ] [ ⋮ ] -->
+        <LinearLayout
+            android:id="@+id/browser_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="6dp"
+            android:gravity="center_vertical"
+            android:background="@color/bg_black">
+
+            <!-- [ Home ] Button -->
+            <ImageButton
+                android:id="@+id/btn_home"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_home"
+                android:contentDescription="Home" />
+
+            <!-- [ URL / Search Field ] -->
+            <EditText
+                android:id="@+id/edit_url_search"
+                android:layout_width="0dp"
+                android:layout_height="38dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="6dp"
+                android:background="@drawable/bg_toolbar_edittext"
+                android:hint="Search or enter URL"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_tertiary"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif"
+                android:paddingHorizontal="10dp"
+                android:singleLine="true"
+                android:imeOptions="actionGo"
+                android:inputType="textUri" />
+
+            <!-- [ Active Tab Icon / Switcher ] - Just before F12 button -->
+            <FrameLayout
+                android:id="@+id/btn_tabs"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginEnd="6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Active Tabs"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/txt_tab_count"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:background="@drawable/bg_tab_box"
+                    android:text="1"
+                    android:textColor="@color/text_primary"
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <!-- [ F12 ] Button - Immediately adjacent to right of active tab icon! -->
+            <Button
+                android:id="@+id/btn_f12"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_f12_button"
+                android:text="F12"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:fontFamily="monospace"
+                android:textStyle="bold"
+                android:minWidth="48dp"
+                android:contentDescription="Open Developer Tools" />
+
+            <!-- [ ⋮ ] Menu Button -->
+            <ImageButton
+                android:id="@+id/btn_menu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_menu"
+                android:contentDescription="Menu" />
+        </LinearLayout>
+
+        <!-- Loading Progress Bar -->
+        <ProgressBar
+            android:id="@+id/browser_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:max="100"
+            android:progress="0"
+            android:progressTint="@color/accent_white"
+            android:visibility="gone" />
+
+        <!-- Find in Page Bar (Collapsible) -->
+        <LinearLayout
+            android:id="@+id/find_in_page_bar"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="8dp"
+            android:background="@color/bg_surface"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/find_input"
+                android:layout_width="0dp"
+                android:layout_height="32dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_toolbar_edittext"
+                android:hint="Find in page..."
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_tertiary"
+                android:textSize="12sp"
+                android:paddingHorizontal="8dp"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/find_match_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="0/0"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:fontFamily="monospace" />
+
+            <ImageButton
+                android:id="@+id/btn_find_prev"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="6dp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/ic_arrow_up"
+                android:contentDescription="Previous" />
+
+            <ImageButton
+                android:id="@+id/btn_find_next"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="2dp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/ic_arrow_down"
+                android:contentDescription="Next" />
+
+            <ImageButton
+                android:id="@+id/btn_find_close"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="2dp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/ic_close"
+                android:contentDescription="Close Find" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/border_color" />
+
+        <!-- Browser Content Area: Native Dashboard & Web Content -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_black">
+
+            <!-- Native Android Browser Dashboard -->
+            <include
+                android:id="@+id/native_dashboard"
+                layout="@layout/layout_browser_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible" />
+
+            <!-- Browser WebView ViewContainer -->
+            <FrameLayout
+                android:id="@+id/webview_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_black"
+                android:visibility="gone" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- F12 Developer Tools Workspace Container (Overlay) -->
+    <FrameLayout
+        android:id="@+id/devtools_workspace_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_black"
+        android:visibility="gone" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
