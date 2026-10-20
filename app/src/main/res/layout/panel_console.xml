@@ -136,6 +136,7 @@
             android:layout_marginStart="4dp"
             android:background="@drawable/bg_button_white"
             android:src="@drawable/ic_play"
+            android:tint="@color/bg_black"
             android:contentDescription="Execute" />
     </LinearLayout>
 </LinearLayout>

@@ -93,15 +93,23 @@ public class ElementsPanel implements DevToolsPanel {
     }
 
     private void initSubtabs() {
+        int colorUnselected = androidx.core.content.ContextCompat.getColor(controller.getContext(), R.color.text_secondary);
+        int colorSelected = androidx.core.content.ContextCompat.getColor(controller.getContext(), R.color.bg_black);
+
+        subtabHtml.setTextColor(colorSelected);
+        subtabStyles.setTextColor(colorUnselected);
+        subtabBoxModel.setTextColor(colorUnselected);
+        subtabAttrs.setTextColor(colorUnselected);
+
         View.OnClickListener listener = v -> {
             subtabHtml.setBackgroundResource(R.drawable.bg_tab_unselected);
-            subtabHtml.setTextColor(0xFFCCCCCC);
+            subtabHtml.setTextColor(colorUnselected);
             subtabStyles.setBackgroundResource(R.drawable.bg_tab_unselected);
-            subtabStyles.setTextColor(0xFFCCCCCC);
+            subtabStyles.setTextColor(colorUnselected);
             subtabBoxModel.setBackgroundResource(R.drawable.bg_tab_unselected);
-            subtabBoxModel.setTextColor(0xFFCCCCCC);
+            subtabBoxModel.setTextColor(colorUnselected);
             subtabAttrs.setBackgroundResource(R.drawable.bg_tab_unselected);
-            subtabAttrs.setTextColor(0xFFCCCCCC);
+            subtabAttrs.setTextColor(colorUnselected);
 
             viewHtml.setVisibility(View.GONE);
             viewStyles.setVisibility(View.GONE);
@@ -110,19 +118,19 @@ public class ElementsPanel implements DevToolsPanel {
 
             if (v.getId() == R.id.subtab_html) {
                 subtabHtml.setBackgroundResource(R.drawable.bg_tab_selected);
-                subtabHtml.setTextColor(0xFF000000);
+                subtabHtml.setTextColor(colorSelected);
                 viewHtml.setVisibility(View.VISIBLE);
             } else if (v.getId() == R.id.subtab_styles) {
                 subtabStyles.setBackgroundResource(R.drawable.bg_tab_selected);
-                subtabStyles.setTextColor(0xFF000000);
+                subtabStyles.setTextColor(colorSelected);
                 viewStyles.setVisibility(View.VISIBLE);
             } else if (v.getId() == R.id.subtab_boxmodel) {
                 subtabBoxModel.setBackgroundResource(R.drawable.bg_tab_selected);
-                subtabBoxModel.setTextColor(0xFF000000);
+                subtabBoxModel.setTextColor(colorSelected);
                 viewBoxModel.setVisibility(View.VISIBLE);
             } else if (v.getId() == R.id.subtab_attrs) {
                 subtabAttrs.setBackgroundResource(R.drawable.bg_tab_selected);
-                subtabAttrs.setTextColor(0xFF000000);
+                subtabAttrs.setTextColor(colorSelected);
                 viewAttrs.setVisibility(View.VISIBLE);
             }
         };
@@ -296,9 +304,12 @@ public class ElementsPanel implements DevToolsPanel {
     private void showEditHtmlDialog() {
         if (selectedNode == null) return;
         Context context = controller.getContext();
+        int textPrimary = androidx.core.content.ContextCompat.getColor(context, R.color.text_primary);
+        int textTertiary = androidx.core.content.ContextCompat.getColor(context, R.color.text_tertiary);
+
         EditText edit = new EditText(context);
         edit.setBackgroundResource(R.drawable.bg_code_box);
-        edit.setTextColor(0xFFFFFFFF);
+        edit.setTextColor(textPrimary);
         edit.setTextSize(12);
         edit.setText(textOuterHtml.getText().toString());
         edit.setMinLines(6);
@@ -319,20 +330,23 @@ public class ElementsPanel implements DevToolsPanel {
     private void showAddStyleDialog() {
         if (selectedNode == null) return;
         Context context = controller.getContext();
+        int textPrimary = androidx.core.content.ContextCompat.getColor(context, R.color.text_primary);
+        int textTertiary = androidx.core.content.ContextCompat.getColor(context, R.color.text_tertiary);
+
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(24, 16, 24, 16);
 
         EditText propEdit = new EditText(context);
         propEdit.setHint("Property (e.g. background-color, color, font-size)");
-        propEdit.setTextColor(0xFFFFFFFF);
-        propEdit.setHintTextColor(0xFF666666);
+        propEdit.setTextColor(textPrimary);
+        propEdit.setHintTextColor(textTertiary);
         layout.addView(propEdit);
 
         EditText valEdit = new EditText(context);
         valEdit.setHint("Value (e.g. #FFFFFF, 18px, none)");
-        valEdit.setTextColor(0xFFFFFFFF);
-        valEdit.setHintTextColor(0xFF666666);
+        valEdit.setTextColor(textPrimary);
+        valEdit.setHintTextColor(textTertiary);
         layout.addView(valEdit);
 
         new AlertDialog.Builder(context)
@@ -358,16 +372,19 @@ public class ElementsPanel implements DevToolsPanel {
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(24, 16, 24, 16);
 
+        int textPrimary = androidx.core.content.ContextCompat.getColor(context, R.color.text_primary);
+        int textTertiary = androidx.core.content.ContextCompat.getColor(context, R.color.text_tertiary);
+
         EditText nameEdit = new EditText(context);
         nameEdit.setHint("Attribute Name (e.g. class, title, href)");
-        nameEdit.setTextColor(0xFFFFFFFF);
-        nameEdit.setHintTextColor(0xFF666666);
+        nameEdit.setTextColor(textPrimary);
+        nameEdit.setHintTextColor(textTertiary);
         layout.addView(nameEdit);
 
         EditText valEdit = new EditText(context);
         valEdit.setHint("Value");
-        valEdit.setTextColor(0xFFFFFFFF);
-        valEdit.setHintTextColor(0xFF666666);
+        valEdit.setTextColor(textPrimary);
+        valEdit.setHintTextColor(textTertiary);
         layout.addView(valEdit);
 
         new AlertDialog.Builder(context)
@@ -546,7 +563,7 @@ public class ElementsPanel implements DevToolsPanel {
             indent.setLayoutParams(lp);
 
             if (isSelected) {
-                itemView.setBackgroundColor(0xFF262626);
+                itemView.setBackgroundColor(androidx.core.content.ContextCompat.getColor(itemView.getContext(), R.color.highlight_overlay));
             } else {
                 itemView.setBackgroundColor(0x00000000);
             }

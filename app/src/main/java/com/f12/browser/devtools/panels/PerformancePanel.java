@@ -60,7 +60,7 @@ public class PerformancePanel implements DevToolsPanel {
                 isRecording = true;
                 recordStartTime = System.currentTimeMillis();
                 btnRecord.setText("■ STOP RECORDING");
-                btnRecord.setBackgroundResource(R.drawable.bg_button_dark);
+                btnRecord.setBackgroundColor(0xFFDC2626);
                 btnRecord.setTextColor(0xFFFFFFFF);
                 textRecordingStatus.setVisibility(View.VISIBLE);
                 handler.post(timerRunnable);
@@ -69,7 +69,7 @@ public class PerformancePanel implements DevToolsPanel {
                 long totalSecs = (System.currentTimeMillis() - recordStartTime) / 1000;
                 btnRecord.setText("● START RECORDING");
                 btnRecord.setBackgroundResource(R.drawable.bg_button_white);
-                btnRecord.setTextColor(0xFF000000);
+                btnRecord.setTextColor(androidx.core.content.ContextCompat.getColor(controller.getContext(), R.color.bg_black));
                 textRecordingStatus.setText("✔ Recording finished: " + totalSecs + "s profile captured.");
                 handler.removeCallbacks(timerRunnable);
                 loadMetrics();
@@ -140,7 +140,7 @@ public class PerformancePanel implements DevToolsPanel {
             handler.removeCallbacks(timerRunnable);
             btnRecord.setText("● START RECORDING");
             btnRecord.setBackgroundResource(R.drawable.bg_button_white);
-            btnRecord.setTextColor(0xFF000000);
+            btnRecord.setTextColor(androidx.core.content.ContextCompat.getColor(controller.getContext(), R.color.bg_black));
             textRecordingStatus.setVisibility(View.GONE);
         }
     }

@@ -288,8 +288,8 @@
       overlayEl.style.position = 'fixed';
       overlayEl.style.pointerEvents = 'none';
       overlayEl.style.zIndex = '2147483647';
-      overlayEl.style.background = 'rgba(255, 255, 255, 0.2)';
-      overlayEl.style.border = '2px solid #FFFFFF';
+      overlayEl.style.background = 'rgba(59, 130, 246, 0.25)';
+      overlayEl.style.border = '2px solid #2563EB';
       overlayEl.style.display = 'none';
       overlayEl.style.transition = 'all 0.1s ease-out';
 
@@ -297,13 +297,13 @@
       tooltipEl.style.position = 'absolute';
       tooltipEl.style.top = '-26px';
       tooltipEl.style.left = '0';
-      tooltipEl.style.background = '#000000';
+      tooltipEl.style.background = '#1E293B';
       tooltipEl.style.color = '#FFFFFF';
       tooltipEl.style.fontFamily = 'monospace';
       tooltipEl.style.fontSize = '11px';
       tooltipEl.style.padding = '2px 6px';
-      tooltipEl.style.border = '1px solid #FFFFFF';
-      tooltipEl.style.borderRadius = '2px';
+      tooltipEl.style.border = '1px solid #3B82F6';
+      tooltipEl.style.borderRadius = '4px';
       tooltipEl.style.whiteSpace = 'nowrap';
       overlayEl.appendChild(tooltipEl);
 

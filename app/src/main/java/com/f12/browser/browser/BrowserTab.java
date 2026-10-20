@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.http.SslCertificate;
 import android.view.View;
+import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import com.f12.browser.devtools.DevToolsBridge;
@@ -16,12 +17,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BrowserTab {
+    public static final String CHROME_MOBILE_USER_AGENT =
+            "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36";
+
     private final String id;
     private final WebView webView;
     private String currentUrl = "";
     private String currentTitle = "New Tab";
     private int progress = 0;
     private boolean isDesktopMode = false;
+    private boolean clearHistoryPending = false;
+    private int sessionStartIndex = -1;
     private SslCertificate sslCertificate = null;
     private static String cachedInjectedJs = null;
 
@@ -34,7 +40,9 @@ public class BrowserTab {
         this.webView = new WebView(context);
 
         WebSettings settings = webView.getSettings();
+        settings.setUserAgentString(CHROME_MOBILE_USER_AGENT);
         settings.setJavaScriptEnabled(true);
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
         settings.setAllowFileAccess(true);
@@ -45,6 +53,11 @@ public class BrowserTab {
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+
+        // Enable third party cookies for Google Account authentication
+        try {
+            CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
+        } catch (Exception ignored) {}
 
         // Add JavaScript Interface
         webView.addJavascriptInterface(new DevToolsBridge(devToolsController), "DevToolsNative");
@@ -82,13 +95,19 @@ public class BrowserTab {
     public void setProgress(int progress) { this.progress = progress; }
     public boolean isDesktopMode() { return isDesktopMode; }
 
+    public boolean isClearHistoryPending() { return clearHistoryPending; }
+    public void setClearHistoryPending(boolean clear) { this.clearHistoryPending = clear; }
+
+    public int getSessionStartIndex() { return sessionStartIndex; }
+    public void setSessionStartIndex(int index) { this.sessionStartIndex = index; }
+
     public void setDesktopMode(boolean desktop) {
         this.isDesktopMode = desktop;
         if (desktop) {
             webView.getSettings().setUserAgentString(SettingsManager.DESKTOP_USER_AGENT);
             webView.getSettings().setUseWideViewPort(true);
         } else {
-            webView.getSettings().setUserAgentString(null);
+            webView.getSettings().setUserAgentString(CHROME_MOBILE_USER_AGENT);
             webView.getSettings().setUseWideViewPort(true);
         }
     }
@@ -98,6 +117,14 @@ public class BrowserTab {
 
     public List<ConsoleMessageItem> getConsoleMessages() { return consoleMessages; }
     public void addConsoleMessage(ConsoleMessageItem item) {
+        if (!consoleMessages.isEmpty()) {
+            ConsoleMessageItem last = consoleMessages.get(consoleMessages.size() - 1);
+            if (last.getLevel() == item.getLevel()
+                    && Math.abs(last.getTimestamp() - item.getTimestamp()) < 350
+                    && (last.getMessage() != null && last.getMessage().equals(item.getMessage()))) {
+                return;
+            }
+        }
         consoleMessages.add(item);
     }
     public void clearConsoleMessages() {

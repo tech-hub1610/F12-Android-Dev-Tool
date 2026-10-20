@@ -1,29 +1,44 @@
 <resources>
-    <!-- Monochrome Palette -->
-    <color name="bg_black">#000000</color>
-    <color name="bg_dark">#121212</color>
-    <color name="bg_surface">#1A1A1A</color>
-    <color name="bg_surface_elevated">#242424</color>
-    <color name="border_color">#333333</color>
-    <color name="border_light">#444444</color>
+    <!-- Light Palette (Default) -->
+    <color name="bg_black">#FFFFFF</color>
+    <color name="bg_dark">#F4F5F7</color>
+    <color name="bg_surface">#FFFFFF</color>
+    <color name="bg_surface_elevated">#F1F3F4</color>
+    <color name="border_color">#D0D5DD</color>
+    <color name="border_light">#E4E7EC</color>
     
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#AAAAAA</color>
-    <color name="text_tertiary">#666666</color>
+    <color name="modal_surface">#FFFFFF</color>
+    <color name="modal_border">#9E9E9E</color>
     
-    <color name="accent_white">#FFFFFF</color>
-    <color name="accent_gray">#888888</color>
+    <color name="text_primary">#111827</color>
+    <color name="text_secondary">#4B5563</color>
+    <color name="text_tertiary">#6B7280</color>
     
-    <!-- Code Syntax Colors (Monochrome / High Contrast) -->
-    <color name="code_tag">#FFFFFF</color>
-    <color name="code_attr">#CCCCCC</color>
-    <color name="code_val">#999999</color>
-    <color name="code_comment">#555555</color>
-    <color name="code_keyword">#FFFFFF</color>
+    <color name="accent_white">#111827</color>
+    <color name="accent_gray">#6B7280</color>
     
-    <!-- Status Badges (Monochrome high contrast) -->
-    <color name="status_badge_bg">#2C2C2C</color>
-    <color name="status_badge_text">#FFFFFF</color>
-    <color name="highlight_overlay">#44FFFFFF</color>
-    <color name="highlight_border">#FFFFFF</color>
+    <!-- Code Syntax Colors (Light Mode) -->
+    <color name="code_tag">#0969DA</color>
+    <color name="code_attr">#6E7781</color>
+    <color name="code_val">#0A3069</color>
+    <color name="code_comment">#6E7781</color>
+    <color name="code_keyword">#CF222E</color>
+    
+    <!-- Status Badges -->
+    <color name="status_badge_bg">#E5E7EB</color>
+    <color name="status_badge_text">#111827</color>
+    <color name="highlight_overlay">#33000000</color>
+    <color name="highlight_border">#111827</color>
+    
+    <!-- Wallpaper Scrim -->
+    <color name="wallpaper_scrim">#CCFFFFFF</color>
+
+    <!-- Console Categorization Colors (Light Theme) -->
+    <color name="console_error_bg">#18EF4444</color>
+    <color name="console_error_text">#B91C1C</color>
+    <color name="console_error_badge">#DC2626</color>
+    <color name="console_warn_bg">#18F59E0B</color>
+    <color name="console_warn_text">#92400E</color>
+    <color name="console_warn_badge">#D97706</color>
+    <color name="console_info_badge">#2563EB</color>
 </resources>

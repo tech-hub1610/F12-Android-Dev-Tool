@@ -104,6 +104,15 @@ public class BrowserWebViewClient extends WebViewClient {
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
 
+        if (tab.isClearHistoryPending()) {
+            tab.setClearHistoryPending(false);
+            view.clearHistory();
+            tab.setSessionStartIndex(0);
+        } else if (tab.getSessionStartIndex() < 0) {
+            android.webkit.WebBackForwardList history = view.copyBackForwardList();
+            tab.setSessionStartIndex(history != null ? history.getCurrentIndex() : 0);
+        }
+
         if (url == null || url.equals("about:blank") || url.equalsIgnoreCase(UrlUtils.DASHBOARD_URL)) {
             if (pageListener != null) {
                 pageListener.onPageFinished(url, "");

@@ -204,15 +204,16 @@ public class LighthousePanel implements DevToolsPanel {
             evidence.setText("Evidence: " + item.getEvidence());
             fix.setText("Fix: " + item.getFix());
 
+            Context ctx = itemView.getContext();
             if (item.getSeverity() == AuditItem.Severity.PASS) {
                 severityBadge.setBackgroundResource(R.drawable.bg_button_white);
-                severityBadge.setTextColor(0xFF000000);
+                severityBadge.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.bg_black));
             } else if (item.getSeverity() == AuditItem.Severity.WARN) {
                 severityBadge.setBackgroundResource(R.drawable.bg_badge);
-                severityBadge.setTextColor(0xFFFFFFFF);
+                severityBadge.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.console_warn_badge));
             } else {
                 severityBadge.setBackgroundResource(R.drawable.bg_button_dark);
-                severityBadge.setTextColor(0xFFCCCCCC);
+                severityBadge.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.console_error_badge));
             }
         }
     }

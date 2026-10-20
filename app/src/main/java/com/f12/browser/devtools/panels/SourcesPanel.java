@@ -191,8 +191,9 @@ public class SourcesPanel implements DevToolsPanel {
         String lowerContent = content.toLowerCase();
         String lowerQ = query.toLowerCase();
         int idx = 0;
+        int highlightColor = androidx.core.content.ContextCompat.getColor(controller.getContext(), R.color.highlight_overlay);
         while ((idx = lowerContent.indexOf(lowerQ, idx)) != -1) {
-            spannable.setSpan(new BackgroundColorSpan(0xFF444444), idx, idx + query.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(new BackgroundColorSpan(highlightColor), idx, idx + query.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             idx += query.length();
         }
         textCodeContent.setText(spannable);

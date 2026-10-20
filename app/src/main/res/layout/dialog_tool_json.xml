@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/bg_black">
+    android:padding="20dp"
+    android:background="@drawable/bg_dialog_modal">
 
     <EditText
         android:id="@+id/json_input"

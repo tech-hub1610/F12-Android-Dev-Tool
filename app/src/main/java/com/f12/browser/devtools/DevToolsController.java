@@ -67,6 +67,9 @@ public class DevToolsController {
         this.panelContainer = view.findViewById(R.id.devtools_panel_container);
         this.pageTitle = view.findViewById(R.id.workspace_page_title);
         this.badgeErrors = view.findViewById(R.id.badge_errors_count);
+        if (this.badgeErrors != null) {
+            this.badgeErrors.setOnClickListener(v -> selectPanel("console"));
+        }
 
         view.findViewById(R.id.btn_close_devtools).setOnClickListener(v -> {
             if (closeListener != null) {
@@ -118,10 +121,10 @@ public class DevToolsController {
         for (Map.Entry<String, TextView> entry : tabButtons.entrySet()) {
             if (entry.getKey().equals(key)) {
                 entry.getValue().setBackgroundResource(R.drawable.bg_tab_selected);
-                entry.getValue().setTextColor(0xFF000000);
+                entry.getValue().setTextColor(androidx.core.content.ContextCompat.getColor(context, R.color.bg_black));
             } else {
                 entry.getValue().setBackgroundResource(R.drawable.bg_tab_unselected);
-                entry.getValue().setTextColor(0xFFCCCCCC);
+                entry.getValue().setTextColor(androidx.core.content.ContextCompat.getColor(context, R.color.text_secondary));
             }
         }
 
@@ -173,7 +176,12 @@ public class DevToolsController {
             }
             errorCount = errs;
             badgeErrors.setText(errorCount + (errorCount == 1 ? " Error" : " Errors"));
-            badgeErrors.setTextColor(errorCount > 0 ? 0xFFFFFFFF : 0xFF888888);
+            if (errorCount > 0) {
+                badgeErrors.setTextColor(0xFFFF3B30);
+                badgeErrors.setBackgroundResource(R.drawable.bg_badge);
+            } else {
+                badgeErrors.setTextColor(androidx.core.content.ContextCompat.getColor(context, R.color.text_secondary));
+            }
         }
     }
 

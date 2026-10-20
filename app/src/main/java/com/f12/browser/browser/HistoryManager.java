@@ -23,6 +23,11 @@ public class HistoryManager {
             this.url = url;
             this.timestamp = timestamp;
         }
+
+        @Override
+        public String toString() {
+            return url != null ? url : "";
+        }
     }
 
     public HistoryManager(Context context) {
@@ -61,6 +66,30 @@ public class HistoryManager {
             list = list.subList(0, MAX_HISTORY);
         }
         saveHistory(list);
+    }
+
+    public int importHistory(List<HistoryItem> items) {
+        if (items == null || items.isEmpty()) return 0;
+        List<HistoryItem> current = getHistory();
+        java.util.Set<String> existingUrls = new java.util.HashSet<>();
+        for (HistoryItem h : current) {
+            existingUrls.add(h.url);
+        }
+        int added = 0;
+        for (HistoryItem item : items) {
+            if (item.url != null && !item.url.isEmpty() && !existingUrls.contains(item.url)) {
+                current.add(item);
+                existingUrls.add(item.url);
+                added++;
+            }
+        }
+        if (current.size() > MAX_HISTORY) {
+            current = current.subList(0, MAX_HISTORY);
+        }
+        if (added > 0) {
+            saveHistory(current);
+        }
+        return added;
     }
 
     public void clearHistory() {

@@ -189,6 +189,9 @@ public class NetworkPanel implements DevToolsPanel {
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setView(view)
                 .create();
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
 
         TextView title = view.findViewById(R.id.dialog_req_title);
         title.setText(item.getFileName());
@@ -316,12 +319,15 @@ public class NetworkPanel implements DevToolsPanel {
         public void bind(NetworkRequestItem item) {
             int code = item.getStatusCode();
             reqStatus.setText(String.valueOf(code));
+            Context ctx = itemView.getContext();
             if (code >= 200 && code < 300) {
-                reqStatus.setTextColor(0xFFFFFFFF);
+                reqStatus.setTextColor(0xFF10B981);
+            } else if (code >= 300 && code < 400) {
+                reqStatus.setTextColor(0xFF3B82F6);
             } else if (code >= 400 || code == 0) {
-                reqStatus.setTextColor(0xFFCCCCCC);
+                reqStatus.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.console_error_text));
             } else {
-                reqStatus.setTextColor(0xFFAAAAAA);
+                reqStatus.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.text_secondary));
             }
 
             reqMethod.setText(item.getMethod());

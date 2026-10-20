@@ -1,6 +1,10 @@
 package com.f12.browser.browser;
 
+import android.net.Uri;
+import android.view.View;
 import android.webkit.ConsoleMessage;
+import android.webkit.GeolocationPermissions;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import com.f12.browser.devtools.DevToolsController;
@@ -10,6 +14,9 @@ public class BrowserWebChromeClient extends WebChromeClient {
     public interface ChromeListener {
         void onProgressChanged(int progress);
         void onTitleChanged(String title);
+        boolean onShowFileChooser(ValueCallback<Uri[]> callback, FileChooserParams params);
+        void onShowCustomView(View view, CustomViewCallback callback);
+        void onHideCustomView();
     }
 
     private final BrowserTab tab;
@@ -37,6 +44,33 @@ public class BrowserWebChromeClient extends WebChromeClient {
         tab.setCurrentTitle(title);
         if (chromeListener != null) {
             chromeListener.onTitleChanged(title);
+        }
+    }
+
+    @Override
+    public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+        callback.invoke(origin, true, false);
+    }
+
+    @Override
+    public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+        if (chromeListener != null) {
+            return chromeListener.onShowFileChooser(filePathCallback, fileChooserParams);
+        }
+        return false;
+    }
+
+    @Override
+    public void onShowCustomView(View view, CustomViewCallback callback) {
+        if (chromeListener != null) {
+            chromeListener.onShowCustomView(view, callback);
+        }
+    }
+
+    @Override
+    public void onHideCustomView() {
+        if (chromeListener != null) {
+            chromeListener.onHideCustomView();
         }
     }
 

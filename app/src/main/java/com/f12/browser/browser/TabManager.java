@@ -67,7 +67,9 @@ public class TabManager {
         if (tabs.isEmpty()) {
             newTab(com.f12.browser.util.UrlUtils.DASHBOARD_URL);
         } else {
-            if (activeTabIndex >= tabs.size()) {
+            if (index < activeTabIndex) {
+                activeTabIndex--;
+            } else if (activeTabIndex >= tabs.size()) {
                 activeTabIndex = tabs.size() - 1;
             }
             if (tabListener != null) {

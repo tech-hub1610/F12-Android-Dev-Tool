@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_black">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- User Agent Switcher -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="USER-AGENT SWITCHER"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_monochrome"
+            android:padding="10dp"
+            android:layout_marginBottom="14dp">
+
+            <Button
+                android:id="@+id/btn_ua_selector"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingHorizontal="14dp"
+                android:background="@drawable/bg_button_dark"
+                android:text="Default Android Mobile"
+                android:textColor="@color/text_primary"
+                android:textSize="12sp"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:id="@+id/text_current_ua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_code_box"
+                android:textColor="@color/text_secondary"
+                android:textSize="10sp"
+                android:fontFamily="monospace"
+                android:padding="6dp"
+                android:textIsSelectable="true" />
+        </LinearLayout>
+
+        <!-- Sensor Simulation: Geolocation -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SENSOR OVERRIDE (GEOLOCATION MOCK)"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_monochrome"
+            android:padding="10dp"
+            android:layout_marginBottom="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="6dp">
+
+                <EditText
+                    android:id="@+id/input_mock_lat"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_toolbar_edittext"
+                    android:hint="Latitude (e.g. 37.7749)"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_tertiary"
+                    android:textSize="11sp"
+                    android:paddingHorizontal="8dp"
+                    android:layout_marginEnd="6dp" />
+
+                <EditText
+                    android:id="@+id/input_mock_lng"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_toolbar_edittext"
+                    android:hint="Longitude (e.g. -122.4194)"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_tertiary"
+                    android:textSize="11sp"
+                    android:paddingHorizontal="8dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_apply_geo"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingHorizontal="14dp"
+                android:background="@drawable/bg_button_dark"
+                android:text="INJECT GEOLOCATION OVERRIDE"
+                android:textColor="@color/text_primary"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Developer Utilities -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DEVELOPER UTILITIES"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btn_tool_json"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bg_button_dark"
+                android:text="JSON FORMATTER"
+                android:textColor="@color/text_primary"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:layout_marginEnd="6dp" />
+
+            <Button
+                android:id="@+id/btn_tool_url"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bg_button_dark"
+                android:text="URL ENCODER"
+                android:textColor="@color/text_primary"
+                android:textSize="11sp"
+                android:fontFamily="monospace" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btn_tool_base64"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bg_button_dark"
+                android:text="BASE64 CODEC"
+                android:textColor="@color/text_primary"
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:layout_marginEnd="6dp" />
+
+            <Button
+                android:id="@+id/btn_tool_regex"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:paddingHorizontal="10dp"
+                android:background="@drawable/bg_button_dark"
+                android:text="REGEX TESTER"
+                android:textColor="@color/text_primary"
+                android:textSize="11sp"
+                android:fontFamily="monospace" />
+        </LinearLayout>
+
+        <!-- Full Diagnostic Package Export -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DIAGNOSTIC BUNDLE"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp" />
+
+        <Button
+            android:id="@+id/btn_export_all_diagnostics"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:paddingHorizontal="16dp"
+            android:background="@drawable/bg_button_white"
+            android:text="EXPORT COMPLETE DIAGNOSTIC REPORT"
+            android:textColor="@color/bg_black"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</ScrollView>

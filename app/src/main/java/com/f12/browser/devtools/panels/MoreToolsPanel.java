@@ -208,14 +208,17 @@ public class MoreToolsPanel implements DevToolsPanel {
 
     private void showUrlCodecDialog() {
         Context context = controller.getContext();
+        int textPrimary = androidx.core.content.ContextCompat.getColor(context, R.color.text_primary);
+        int textTertiary = androidx.core.content.ContextCompat.getColor(context, R.color.text_tertiary);
+
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(24, 16, 24, 16);
 
         EditText input = new EditText(context);
         input.setHint("Input URL or text...");
-        input.setTextColor(0xFFFFFFFF);
-        input.setHintTextColor(0xFF666666);
+        input.setTextColor(textPrimary);
+        input.setHintTextColor(textTertiary);
         layout.addView(input);
 
         LinearLayout btns = new LinearLayout(context);
@@ -225,13 +228,13 @@ public class MoreToolsPanel implements DevToolsPanel {
         Button btnEnc = new Button(context);
         btnEnc.setText("ENCODE");
         btnEnc.setBackgroundResource(R.drawable.bg_button_dark);
-        btnEnc.setTextColor(0xFFFFFFFF);
+        btnEnc.setTextColor(textPrimary);
         btns.addView(btnEnc);
 
         Button btnDec = new Button(context);
         btnDec.setText("DECODE");
         btnDec.setBackgroundResource(R.drawable.bg_button_dark);
-        btnDec.setTextColor(0xFFFFFFFF);
+        btnDec.setTextColor(textPrimary);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.leftMargin = 16;
         btnDec.setLayoutParams(lp);
@@ -240,7 +243,7 @@ public class MoreToolsPanel implements DevToolsPanel {
         layout.addView(btns);
 
         TextView output = new TextView(context);
-        output.setTextColor(0xFFFFFFFF);
+        output.setTextColor(textPrimary);
         output.setTextIsSelectable(true);
         output.setBackgroundResource(R.drawable.bg_code_box);
         output.setPadding(16, 16, 16, 16);
@@ -271,14 +274,17 @@ public class MoreToolsPanel implements DevToolsPanel {
 
     private void showBase64Dialog() {
         Context context = controller.getContext();
+        int textPrimary = androidx.core.content.ContextCompat.getColor(context, R.color.text_primary);
+        int textTertiary = androidx.core.content.ContextCompat.getColor(context, R.color.text_tertiary);
+
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(24, 16, 24, 16);
 
         EditText input = new EditText(context);
         input.setHint("Input text...");
-        input.setTextColor(0xFFFFFFFF);
-        input.setHintTextColor(0xFF666666);
+        input.setTextColor(textPrimary);
+        input.setHintTextColor(textTertiary);
         layout.addView(input);
 
         LinearLayout btns = new LinearLayout(context);
@@ -288,13 +294,13 @@ public class MoreToolsPanel implements DevToolsPanel {
         Button btnEnc = new Button(context);
         btnEnc.setText("ENCODE");
         btnEnc.setBackgroundResource(R.drawable.bg_button_dark);
-        btnEnc.setTextColor(0xFFFFFFFF);
+        btnEnc.setTextColor(textPrimary);
         btns.addView(btnEnc);
 
         Button btnDec = new Button(context);
         btnDec.setText("DECODE");
         btnDec.setBackgroundResource(R.drawable.bg_button_dark);
-        btnDec.setTextColor(0xFFFFFFFF);
+        btnDec.setTextColor(textPrimary);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         lp.leftMargin = 16;
         btnDec.setLayoutParams(lp);
@@ -303,7 +309,7 @@ public class MoreToolsPanel implements DevToolsPanel {
         layout.addView(btns);
 
         TextView output = new TextView(context);
-        output.setTextColor(0xFFFFFFFF);
+        output.setTextColor(textPrimary);
         output.setTextIsSelectable(true);
         output.setBackgroundResource(R.drawable.bg_code_box);
         output.setPadding(16, 16, 16, 16);
@@ -335,30 +341,34 @@ public class MoreToolsPanel implements DevToolsPanel {
 
     private void showRegexDialog() {
         Context context = controller.getContext();
+        int textPrimary = androidx.core.content.ContextCompat.getColor(context, R.color.text_primary);
+        int textTertiary = androidx.core.content.ContextCompat.getColor(context, R.color.text_tertiary);
+        int bgBlack = androidx.core.content.ContextCompat.getColor(context, R.color.bg_black);
+
         LinearLayout layout = new LinearLayout(context);
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(24, 16, 24, 16);
 
         EditText patternInput = new EditText(context);
         patternInput.setHint("Regex Pattern (e.g. \\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b)");
-        patternInput.setTextColor(0xFFFFFFFF);
-        patternInput.setHintTextColor(0xFF666666);
+        patternInput.setTextColor(textPrimary);
+        patternInput.setHintTextColor(textTertiary);
         layout.addView(patternInput);
 
         EditText testInput = new EditText(context);
         testInput.setHint("Test String");
-        testInput.setTextColor(0xFFFFFFFF);
-        testInput.setHintTextColor(0xFF666666);
+        testInput.setTextColor(textPrimary);
+        testInput.setHintTextColor(textTertiary);
         layout.addView(testInput);
 
         Button btnTest = new Button(context);
         btnTest.setText("TEST REGEX");
         btnTest.setBackgroundResource(R.drawable.bg_button_white);
-        btnTest.setTextColor(0xFF000000);
+        btnTest.setTextColor(bgBlack);
         layout.addView(btnTest);
 
         TextView output = new TextView(context);
-        output.setTextColor(0xFFFFFFFF);
+        output.setTextColor(textPrimary);
         output.setTextIsSelectable(true);
         output.setBackgroundResource(R.drawable.bg_code_box);
         output.setPadding(16, 16, 16, 16);

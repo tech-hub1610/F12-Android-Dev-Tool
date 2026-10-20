@@ -79,6 +79,27 @@ public class BookmarkManager {
         return false;
     }
 
+    public int importBookmarks(List<BookmarkItem> items) {
+        if (items == null || items.isEmpty()) return 0;
+        List<BookmarkItem> current = getBookmarks();
+        java.util.Set<String> existingUrls = new java.util.HashSet<>();
+        for (BookmarkItem b : current) {
+            existingUrls.add(b.url);
+        }
+        int added = 0;
+        for (BookmarkItem item : items) {
+            if (item.url != null && !item.url.isEmpty() && !existingUrls.contains(item.url)) {
+                current.add(item);
+                existingUrls.add(item.url);
+                added++;
+            }
+        }
+        if (added > 0) {
+            saveBookmarks(current);
+        }
+        return added;
+    }
+
     private void saveBookmarks(List<BookmarkItem> list) {
         JSONArray arr = new JSONArray();
         for (BookmarkItem item : list) {

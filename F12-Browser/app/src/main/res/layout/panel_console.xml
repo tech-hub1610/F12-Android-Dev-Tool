@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_black">
+
+    <!-- Filter and Action Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:gravity="center_vertical"
+        android:background="@color/bg_dark">
+
+        <EditText
+            android:id="@+id/console_search"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_toolbar_edittext"
+            android:hint="Filter console..."
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_tertiary"
+            android:textSize="13sp"
+            android:paddingHorizontal="10dp"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/btn_filter_level"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:paddingHorizontal="14dp"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/bg_button_dark"
+            android:text="ALL"
+            android:textColor="@color/text_primary"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btn_clear_console"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="6dp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="Clear" />
+
+        <ImageButton
+            android:id="@+id/btn_copy_console"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_copy"
+            android:contentDescription="Copy All" />
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color" />
+
+    <!-- Console Messages List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_console"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="vertical" />
+
+    <!-- Divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color" />
+
+    <!-- Command Execution Input Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:gravity="center_vertical"
+        android:background="@color/bg_surface">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="❯ "
+            android:textColor="@color/text_primary"
+            android:textSize="16sp"
+            android:fontFamily="monospace"
+            android:paddingStart="4dp"
+            android:paddingEnd="2dp" />
+
+        <EditText
+            android:id="@+id/console_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="38dp"
+            android:maxHeight="100dp"
+            android:background="@drawable/bg_code_box"
+            android:hint="JavaScript expression (e.g. $0, document)..."
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_tertiary"
+            android:textSize="13sp"
+            android:fontFamily="monospace"
+            android:inputType="textMultiLine" />
+
+        <ImageButton
+            android:id="@+id/btn_history_prev"
+            android:layout_width="32dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="4dp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_arrow_up"
+            android:contentDescription="Previous Command" />
+
+        <ImageButton
+            android:id="@+id/btn_history_next"
+            android:layout_width="32dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_arrow_down"
+            android:contentDescription="Next Command" />
+
+        <ImageButton
+            android:id="@+id/btn_eval_js"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/bg_button_white"
+            android:src="@drawable/ic_play"
+            android:contentDescription="Execute" />
+    </LinearLayout>
+</LinearLayout>

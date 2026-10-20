@@ -126,8 +126,14 @@ public class ConsolePanel implements DevToolsPanel {
         BrowserTab activeTab = controller.getActiveTab();
         if (activeTab != null && activeTab.getWebView() != null) {
             WebView webView = activeTab.getWebView();
-            // Wrap in safe expression evaluation
-            String wrapped = "(function() { try { var res = (" + code + "); return (res === undefined) ? 'undefined' : (typeof res === 'object' ? JSON.stringify(res) : String(res)); } catch(e) { return 'Error: ' + e.message; } })()";
+            // Wrap in safe expression and statement evaluation
+            String quoted = org.json.JSONObject.quote(code);
+            String wrapped = "(function() { try { var res = eval(" + quoted + "); "
+                    + "if (res === undefined) return 'undefined'; "
+                    + "if (res === null) return 'null'; "
+                    + "if (typeof res === 'object') { try { return JSON.stringify(res, null, 2); } catch(err) { return String(res); } } "
+                    + "return String(res); "
+                    + "} catch(e) { return 'Error: ' + (e && e.stack ? e.stack : (e.message || String(e))); } })()";
             webView.evaluateJavascript(wrapped, value -> {
                 String cleanVal = value != null ? value : "null";
                 if (cleanVal.startsWith("\"") && cleanVal.endsWith("\"") && cleanVal.length() >= 2) {
@@ -150,6 +156,14 @@ public class ConsolePanel implements DevToolsPanel {
     }
 
     public void addMessage(ConsoleMessageItem item) {
+        if (!allMessages.isEmpty()) {
+            ConsoleMessageItem last = allMessages.get(allMessages.size() - 1);
+            if (last.getLevel() == item.getLevel()
+                    && Math.abs(last.getTimestamp() - item.getTimestamp()) < 350
+                    && (last.getMessage() != null && last.getMessage().equals(item.getMessage()))) {
+                return;
+            }
+        }
         allMessages.add(item);
         if (matchesFilter(item)) {
             filteredMessages.add(item);
@@ -250,6 +264,7 @@ public class ConsolePanel implements DevToolsPanel {
     }
 
     private static class ConsoleViewHolder extends RecyclerView.ViewHolder {
+        private final View container;
         private final TextView levelBadge;
         private final TextView msgText;
         private final TextView msgTime;
@@ -257,6 +272,7 @@ public class ConsolePanel implements DevToolsPanel {
 
         public ConsoleViewHolder(@NonNull View itemView) {
             super(itemView);
+            container = itemView.findViewById(R.id.msg_container);
             levelBadge = itemView.findViewById(R.id.msg_level_badge);
             msgText = itemView.findViewById(R.id.msg_text);
             msgTime = itemView.findViewById(R.id.msg_time);
@@ -264,28 +280,42 @@ public class ConsolePanel implements DevToolsPanel {
         }
 
         public void bind(ConsoleMessageItem item) {
+            Context ctx = itemView.getContext();
             levelBadge.setText(item.getLevel().name());
             msgText.setText(item.getMessage());
             msgTime.setText(FormatUtils.formatTime(item.getTimestamp()));
 
-            // Styling based on level
+            // Styling based on level with theme-adaptive colors & error highlighting
             if (item.getLevel() == ConsoleMessageItem.Level.ERROR) {
-                levelBadge.setBackgroundResource(R.drawable.bg_button_white);
-                levelBadge.setTextColor(0xFF000000);
-                msgText.setTextColor(0xFFFFFFFF);
-            } else if (item.getLevel() == ConsoleMessageItem.Level.WARN) {
-                levelBadge.setBackgroundResource(R.drawable.bg_badge);
+                if (container != null) container.setBackgroundColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.console_error_bg));
+                levelBadge.setBackgroundColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.console_error_badge));
                 levelBadge.setTextColor(0xFFFFFFFF);
-                msgText.setTextColor(0xFFEEEEEE);
+                msgText.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.console_error_text));
+                msgText.setTypeface(android.graphics.Typeface.MONOSPACE, android.graphics.Typeface.BOLD);
+            } else if (item.getLevel() == ConsoleMessageItem.Level.WARN) {
+                if (container != null) container.setBackgroundColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.console_warn_bg));
+                levelBadge.setBackgroundColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.console_warn_badge));
+                levelBadge.setTextColor(0xFFFFFFFF);
+                msgText.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.console_warn_text));
+                msgText.setTypeface(android.graphics.Typeface.MONOSPACE, android.graphics.Typeface.NORMAL);
+            } else if (item.getLevel() == ConsoleMessageItem.Level.INFO) {
+                if (container != null) container.setBackgroundColor(0x00000000);
+                levelBadge.setBackgroundColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.console_info_badge));
+                levelBadge.setTextColor(0xFFFFFFFF);
+                msgText.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.text_primary));
+                msgText.setTypeface(android.graphics.Typeface.MONOSPACE, android.graphics.Typeface.NORMAL);
             } else {
+                if (container != null) container.setBackgroundColor(0x00000000);
                 levelBadge.setBackgroundResource(R.drawable.bg_badge);
-                levelBadge.setTextColor(0xFFAAAAAA);
-                msgText.setTextColor(0xFFDDDDDD);
+                levelBadge.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.text_secondary));
+                msgText.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.text_primary));
+                msgText.setTypeface(android.graphics.Typeface.MONOSPACE, android.graphics.Typeface.NORMAL);
             }
 
             if (item.getSource() != null && !item.getSource().isEmpty()) {
                 msgSource.setVisibility(View.VISIBLE);
                 msgSource.setText(item.getSource() + (item.getLineNumber() > 0 ? ":" + item.getLineNumber() : ""));
+                msgSource.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.text_tertiary));
             } else {
                 msgSource.setVisibility(View.GONE);
             }

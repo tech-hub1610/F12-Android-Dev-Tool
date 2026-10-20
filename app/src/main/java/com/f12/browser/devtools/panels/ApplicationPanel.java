@@ -73,32 +73,40 @@ public class ApplicationPanel implements DevToolsPanel {
     }
 
     private void initTabs() {
+        int colorUnselected = androidx.core.content.ContextCompat.getColor(controller.getContext(), R.color.text_secondary);
+        int colorSelected = androidx.core.content.ContextCompat.getColor(controller.getContext(), R.color.bg_black);
+
+        tabLocal.setTextColor(colorSelected);
+        tabSession.setTextColor(colorUnselected);
+        tabCookies.setTextColor(colorUnselected);
+        tabIndexedDb.setTextColor(colorUnselected);
+
         View.OnClickListener listener = v -> {
             tabLocal.setBackgroundResource(R.drawable.bg_tab_unselected);
-            tabLocal.setTextColor(0xFFCCCCCC);
+            tabLocal.setTextColor(colorUnselected);
             tabSession.setBackgroundResource(R.drawable.bg_tab_unselected);
-            tabSession.setTextColor(0xFFCCCCCC);
+            tabSession.setTextColor(colorUnselected);
             tabCookies.setBackgroundResource(R.drawable.bg_tab_unselected);
-            tabCookies.setTextColor(0xFFCCCCCC);
+            tabCookies.setTextColor(colorUnselected);
             tabIndexedDb.setBackgroundResource(R.drawable.bg_tab_unselected);
-            tabIndexedDb.setTextColor(0xFFCCCCCC);
+            tabIndexedDb.setTextColor(colorUnselected);
 
             if (v.getId() == R.id.tab_storage_local) {
                 currentStorageType = "local";
                 tabLocal.setBackgroundResource(R.drawable.bg_tab_selected);
-                tabLocal.setTextColor(0xFF000000);
+                tabLocal.setTextColor(colorSelected);
             } else if (v.getId() == R.id.tab_storage_session) {
                 currentStorageType = "session";
                 tabSession.setBackgroundResource(R.drawable.bg_tab_selected);
-                tabSession.setTextColor(0xFF000000);
+                tabSession.setTextColor(colorSelected);
             } else if (v.getId() == R.id.tab_storage_cookies) {
                 currentStorageType = "cookies";
                 tabCookies.setBackgroundResource(R.drawable.bg_tab_selected);
-                tabCookies.setTextColor(0xFF000000);
+                tabCookies.setTextColor(colorSelected);
             } else if (v.getId() == R.id.tab_storage_indexeddb) {
                 currentStorageType = "indexeddb";
                 tabIndexedDb.setBackgroundResource(R.drawable.bg_tab_selected);
-                tabIndexedDb.setTextColor(0xFF000000);
+                tabIndexedDb.setTextColor(colorSelected);
             }
             loadStorage();
         };
@@ -217,16 +225,19 @@ public class ApplicationPanel implements DevToolsPanel {
         layout.setOrientation(LinearLayout.VERTICAL);
         layout.setPadding(24, 16, 24, 16);
 
+        int textPrimary = androidx.core.content.ContextCompat.getColor(context, R.color.text_primary);
+        int textTertiary = androidx.core.content.ContextCompat.getColor(context, R.color.text_tertiary);
+
         EditText keyInput = new EditText(context);
         keyInput.setHint("Key");
-        keyInput.setTextColor(0xFFFFFFFF);
-        keyInput.setHintTextColor(0xFF666666);
+        keyInput.setTextColor(textPrimary);
+        keyInput.setHintTextColor(textTertiary);
         layout.addView(keyInput);
 
         EditText valInput = new EditText(context);
         valInput.setHint("Value");
-        valInput.setTextColor(0xFFFFFFFF);
-        valInput.setHintTextColor(0xFF666666);
+        valInput.setTextColor(textPrimary);
+        valInput.setHintTextColor(textTertiary);
         layout.addView(valInput);
 
         new AlertDialog.Builder(context)
@@ -247,7 +258,7 @@ public class ApplicationPanel implements DevToolsPanel {
         Context context = controller.getContext();
         EditText valInput = new EditText(context);
         valInput.setText(entry.value);
-        valInput.setTextColor(0xFFFFFFFF);
+        valInput.setTextColor(androidx.core.content.ContextCompat.getColor(context, R.color.text_primary));
         valInput.setMinLines(3);
         valInput.setBackgroundResource(R.drawable.bg_code_box);
 

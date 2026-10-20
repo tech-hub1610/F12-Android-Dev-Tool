@@ -48,18 +48,19 @@ public class SecurityPanel implements DevToolsPanel {
         boolean isHttps = url != null && url.startsWith("https://");
         boolean isLocal = url != null && url.startsWith("file:///");
 
+        android.content.Context ctx = controller.getContext();
         if (isHttps) {
             statusBadge.setText("SECURE (HTTPS)");
             statusBadge.setBackgroundResource(R.drawable.bg_button_white);
-            statusBadge.setTextColor(0xFF000000);
+            statusBadge.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.bg_black));
         } else if (isLocal) {
             statusBadge.setText("LOCAL ASSET");
             statusBadge.setBackgroundResource(R.drawable.bg_button_dark);
-            statusBadge.setTextColor(0xFFFFFFFF);
+            statusBadge.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.text_primary));
         } else {
             statusBadge.setText("NOT SECURE (HTTP)");
             statusBadge.setBackgroundResource(R.drawable.bg_button_dark);
-            statusBadge.setTextColor(0xFFFFFFFF);
+            statusBadge.setTextColor(androidx.core.content.ContextCompat.getColor(ctx, R.color.console_error_text));
         }
 
         // Certificate Details

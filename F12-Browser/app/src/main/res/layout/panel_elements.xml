@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_black">
+
+    <!-- Top Action Toolbar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:gravity="center_vertical"
+        android:background="@color/bg_dark">
+
+        <ImageButton
+            android:id="@+id/btn_inspect_tap"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_button_dark"
+            android:src="@drawable/ic_search"
+            android:contentDescription="Inspect Element on Page" />
+
+        <EditText
+            android:id="@+id/dom_search"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:layout_marginStart="6dp"
+            android:background="@drawable/bg_toolbar_edittext"
+            android:hint="Search tag, #id, .class..."
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_tertiary"
+            android:textSize="13sp"
+            android:paddingHorizontal="10dp"
+            android:singleLine="true" />
+
+        <ImageButton
+            android:id="@+id/btn_refresh_dom"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="6dp"
+            android:background="?attr/selectableItemBackground"
+            android:src="@drawable/ic_refresh"
+            android:contentDescription="Refresh DOM" />
+    </LinearLayout>
+
+    <!-- Breadcrumb Indicator -->
+    <TextView
+        android:id="@+id/dom_breadcrumbs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        android:background="@color/bg_surface"
+        android:text="html > body"
+        android:textColor="@color/text_secondary"
+        android:textSize="11sp"
+        android:fontFamily="monospace"
+        android:singleLine="true"
+        android:ellipsize="start" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/border_color" />
+
+    <!-- DOM Tree View (Top 55%) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_dom_tree"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="55"
+        android:scrollbars="vertical" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/border_color" />
+
+    <!-- Selected Element Inspector Panel (Bottom 45%) -->
+    <LinearLayout
+        android:id="@+id/selected_element_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="45"
+        android:orientation="vertical"
+        android:background="@color/bg_dark">
+
+        <!-- Subtabs: HTML | Styles | Box Model | Attributes -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:background="@color/bg_surface">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="6dp">
+
+                <TextView
+                    android:id="@+id/subtab_html"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="12dp"
+                    android:background="@drawable/bg_tab_selected"
+                    android:text="HTML"
+                    android:textColor="#000000"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:fontFamily="monospace"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginEnd="6dp" />
+
+                <TextView
+                    android:id="@+id/subtab_styles"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="12dp"
+                    android:background="@drawable/bg_tab_unselected"
+                    android:text="STYLES"
+                    android:textColor="#CCCCCC"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:fontFamily="monospace"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginEnd="6dp" />
+
+                <TextView
+                    android:id="@+id/subtab_boxmodel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="12dp"
+                    android:background="@drawable/bg_tab_unselected"
+                    android:text="BOX MODEL"
+                    android:textColor="#CCCCCC"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:fontFamily="monospace"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginEnd="6dp" />
+
+                <TextView
+                    android:id="@+id/subtab_attrs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="28dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="12dp"
+                    android:background="@drawable/bg_tab_unselected"
+                    android:text="ATTRIBUTES"
+                    android:textColor="#CCCCCC"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:fontFamily="monospace"
+                    android:clickable="true"
+                    android:focusable="true" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <FrameLayout
+            android:id="@+id/element_subtab_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <!-- 1. HTML Content View -->
+            <ScrollView
+                android:id="@+id/view_subtab_html"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="6dp">
+
+                        <Button
+                            android:id="@+id/btn_edit_html"
+                            android:layout_width="wrap_content"
+                            android:layout_height="34dp"
+                            android:paddingHorizontal="12dp"
+                            android:background="@drawable/bg_button_dark"
+                            android:text="EDIT HTML"
+                            android:textColor="@color/text_primary"
+                            android:textSize="10sp" />
+
+                        <Button
+                            android:id="@+id/btn_delete_element"
+                            android:layout_width="wrap_content"
+                            android:layout_height="34dp"
+                            android:paddingHorizontal="12dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/bg_button_dark"
+                            android:text="DELETE"
+                            android:textColor="@color/text_primary"
+                            android:textSize="10sp" />
+
+                        <Button
+                            android:id="@+id/btn_copy_html"
+                            android:layout_width="wrap_content"
+                            android:layout_height="34dp"
+                            android:paddingHorizontal="12dp"
+                            android:layout_marginStart="8dp"
+                            android:background="@drawable/bg_button_dark"
+                            android:text="COPY"
+                            android:textColor="@color/text_primary"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/text_element_outerhtml"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_code_box"
+                        android:textColor="@color/text_primary"
+                        android:textSize="11sp"
+                        android:fontFamily="monospace"
+                        android:padding="8dp"
+                        android:textIsSelectable="true" />
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- 2. Styles View -->
+            <ScrollView
+                android:id="@+id/view_subtab_styles"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btn_add_style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="34dp"
+                        android:paddingHorizontal="14dp"
+                        android:background="@drawable/bg_button_dark"
+                        android:text="+ ADD / EDIT STYLE"
+                        android:textColor="@color/text_primary"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="6dp" />
+
+                    <TextView
+                        android:id="@+id/text_element_styles"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_code_box"
+                        android:textColor="@color/text_primary"
+                        android:textSize="11sp"
+                        android:fontFamily="monospace"
+                        android:padding="8dp"
+                        android:textIsSelectable="true" />
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- 3. Box Model View -->
+            <ScrollView
+                android:id="@+id/view_subtab_boxmodel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/text_box_model_diagram"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_code_box"
+                        android:textColor="@color/text_primary"
+                        android:textSize="11sp"
+                        android:fontFamily="monospace"
+                        android:padding="12dp"
+                        android:gravity="center" />
+                </LinearLayout>
+            </ScrollView>
+
+            <!-- 4. Attributes View -->
+            <ScrollView
+                android:id="@+id/view_subtab_attrs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btn_add_attribute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="34dp"
+                        android:paddingHorizontal="14dp"
+                        android:background="@drawable/bg_button_dark"
+                        android:text="+ SET ATTRIBUTE"
+                        android:textColor="@color/text_primary"
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="6dp" />
+
+                    <TextView
+                        android:id="@+id/text_element_attributes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_code_box"
+                        android:textColor="@color/text_primary"
+                        android:textSize="11sp"
+                        android:fontFamily="monospace"
+                        android:padding="8dp"
+                        android:textIsSelectable="true" />
+                </LinearLayout>
+            </ScrollView>
+
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>
